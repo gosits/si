@@ -1,0 +1,21 @@
+name: workflow
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    timeout-minutes: 9999
+
+    steps:
+      - uses: actions/checkout@v2  
+      - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
+      - run: Get-LocalUser -Name "runneradmin" | Enable-LocalUser
+      - run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+      - run: tar xf ngrok.zip
+      - run: Copy ngrok.exe C:\Windows\System32
+      - run: cmd /c echo ./ngrok.exe authtoken "1xitT1PQl3PjyBOYlTmpv67hb3C_2TbgTofeQPS3rU3UC8iME" >a.ps1
+      - run: cmd /c echo cmd /k start ngrok.exe tcp 3389 >>a.ps1
+      - run: cmd /c echo ping -n 999999 127.0.0.1 >>a.ps1
+      - run: .\a.ps1
