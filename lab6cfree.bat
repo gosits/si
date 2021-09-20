@@ -11,17 +11,12 @@ certutil -urlcache -split -f https://raw.githubusercontent.com/dungphanx2/dungph
 certutil -urlcache -split -f https://raw.githubusercontent.com/dungphanx2/dungphan/master/nircmd.exe
 curl -LJOk https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip
 7z x ngrok-stable-windows-amd64.zip
-
-
+ngrok authtoken 1yGKbQKjmInDgqWczY7JJR30ZDa_3ENxEy5o7jj4u87UHnfRj
+start ngrok tcp 3389
 cd C:\Users\Administrator\Desktop
 curl -LJOk https://raw.githubusercontent.com/dungphanx2/dungphan/master/ChromeSetup.exe
 curl -LJOk https://raw.githubusercontent.com/dungphanx2/dungphan/master/anti-close.bat
 start ChromeSetup.exe
-cls
-@echo off
-set /p id="Paste NGROK AUTHTOKEN (Ctrl+V): "
-ngrok authtoken %id%
-start ngrok tcp 3389
 start anti-close.bat
 net start audiosrv
 taskkill /f /im sqlservr.exe
